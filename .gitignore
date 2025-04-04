@@ -1,0 +1,36 @@
+# ==========================
+# IGNORAR BACKEND (Java/Spring Boot)
+# ==========================
+/target/
+*.jar
+*.war
+*.ear
+.mvn/
+!.mvn/wrapper/maven-wrapper.jar
+**/logs/
+*.log
+**/*.class
+**/.classpath
+**/.project
+**/.settings/
+**/.idea/
+**/.vscode/
+.env
+
+# ==========================
+# IGNORAR FRONTEND (Angular)
+# ==========================
+node_modules/
+dist/
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+package-lock.json
+.angular/
+*.tsbuildinfo
+
+# ==========================
+# IGNORAR CONFIGURAÇÕES LOCAIS
+# ==========================
+.DS_Store
+Thumbs.db
