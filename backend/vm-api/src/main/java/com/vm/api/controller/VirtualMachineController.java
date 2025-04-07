@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+// Para que o frontend consiga consumir os endpoints
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/api/vms")
 public class VirtualMachineController {
