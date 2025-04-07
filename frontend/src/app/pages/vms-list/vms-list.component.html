@@ -1,1 +1,32 @@
-<p>vms-list works!</p>
+<div class="container">
+    <h2>Máquinas Virtuais</h2>
+  
+    <button class="create-button" (click)="goToCreate()">+ Nova Máquina</button>
+  
+    <table>
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>CPU</th>
+          <th>Memória (GB)</th>
+          <th>Status</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let vm of vms; let i = index">
+          <td>{{ vm.displayName }}</td>
+          <td>{{ vm.cpu }}</td>
+          <td>{{ (vm.memory / 1024) | number:'1.0-1' }}</td>
+          <td>{{ vm.status }}</td>
+          <td>
+            <button (click)="startVM(vm)" [disabled]="vm.status === 'RUNNING'">Iniciar</button>
+            <button (click)="pauseVM(vm)" [disabled]="vm.status !== 'RUNNING'">Pausar</button>
+            <button (click)="stopVM(vm)" [disabled]="vm.status === 'STOP'">Parar</button>
+            <button class="delete" (click)="deleteVM(i)">Excluir</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

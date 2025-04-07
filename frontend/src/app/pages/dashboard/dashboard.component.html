@@ -1,1 +1,20 @@
-<p>dashboard works!</p>
+<h2>Dashboard</h2>
+
+<section style="width: 600px; margin-bottom: 40px;">
+  <h3>Vendas Mensais</h3>
+  <canvas baseChart
+          [data]="barChartData"
+          [labels]="barChartLabels"
+          [options]="barChartOptions"
+          [type]="barChartType">
+  </canvas>
+</section>
+
+<section style="width: 600px;">
+  <h3>Distribuição de Produtos</h3>
+  <canvas baseChart
+          [data]="pieChartData"
+          [labels]="pieChartLabels"
+          [type]="pieChartType">
+  </canvas>
+</section>

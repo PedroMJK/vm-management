@@ -1,1 +1,24 @@
-<p>vms-create works!</p>
+<h2>Cadastrar Nova Máquina Virtual</h2>
+
+<form (ngSubmit)="cadastrar()">
+  <div>
+    <label for="nome">Nome:</label>
+    <input id="nome" type="text" [(ngModel)]="displayName" name="displayName" required minlength="5" />
+  </div>
+
+  <div>
+    <label for="memoria">Memória (MB):</label>
+    <input id="memoria" type="number" [(ngModel)]="memory" name="memory" required min="1" />
+    <small>Será salvo em MB, exibido em GB.</small>
+  </div>
+
+  <div>
+    <label for="cpu">Tamanho da CPU:</label>
+    <input id="cpu" type="number" [(ngModel)]="cpu" name="cpu" required min="1" />
+  </div>
+
+  <div style="margin-top: 1rem;">
+    <button type="submit">Cadastrar</button>
+    <button type="button" (click)="voltar()">Voltar</button>
+  </div>
+</form>
