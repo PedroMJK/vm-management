@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-// Para que o frontend consiga consumir os endpoints
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/api/vms")
@@ -30,9 +29,13 @@ public class VirtualMachineController {
     }
 
     @PostMapping
-    public ResponseEntity<VirtualMachine> createVirtualMachine(@RequestBody VirtualMachine vm) {
-        VirtualMachine created = service.create(vm);
-        return ResponseEntity.ok(created);
+    public ResponseEntity<?> createVirtualMachine(@RequestBody VirtualMachine vm) {
+        try {
+            VirtualMachine created = service.create(vm);
+            return ResponseEntity.ok(created);
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
     @PutMapping("/{id}")
@@ -49,5 +52,33 @@ public class VirtualMachineController {
     public ResponseEntity<Void> deleteVirtualMachine(@PathVariable Long id) {
         service.delete(id);
         return ResponseEntity.noContent().build();
+    }
+
+    // Novos endpoints para alterar o status
+    @PostMapping("/{id}/start")
+    public ResponseEntity<VirtualMachine> startVM(@PathVariable Long id) {
+        try {
+            return ResponseEntity.ok(service.startVM(id));
+        } catch (RuntimeException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @PostMapping("/{id}/pause")
+    public ResponseEntity<VirtualMachine> pauseVM(@PathVariable Long id) {
+        try {
+            return ResponseEntity.ok(service.pauseVM(id));
+        } catch (RuntimeException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @PostMapping("/{id}/stop")
+    public ResponseEntity<VirtualMachine> stopVM(@PathVariable Long id) {
+        try {
+            return ResponseEntity.ok(service.stopVM(id));
+        } catch (RuntimeException e) {
+            return ResponseEntity.notFound().build();
+        }
     }
 }

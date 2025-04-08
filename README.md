@@ -2,7 +2,7 @@
 
 Este projeto é uma **interface web desenvolvida com Angular 17** para **gestão e monitoramento de máquinas virtuais**, conectando-se a uma API REST mockada com **Java + Spring Boot**.
 
----
+
 
 ## 🚀 Funcionalidades propostas pelo desafio 
 

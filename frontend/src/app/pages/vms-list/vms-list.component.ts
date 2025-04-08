@@ -2,6 +2,13 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
 
+interface VirtualMachine {
+  displayName: string;
+  cpu: number;
+  memory: number;
+  status: 'RUNNING' | 'PAUSED' | 'STOP';
+}
+
 @Component({
   selector: 'app-vms-list',
   standalone: true,
@@ -10,7 +17,7 @@ import { RouterModule, Router } from '@angular/router';
   styleUrls: ['./vms-list.component.scss']
 })
 export class VmsListComponent {
-  vms: any[] = [];
+  vms: VirtualMachine[] = [];
 
   constructor(private router: Router) {
     this.loadVMs();
@@ -34,7 +41,7 @@ export class VmsListComponent {
     localStorage.setItem('vms', JSON.stringify(this.vms));
   }
 
-  startVM(vm: any): void {
+  startVM(vm: VirtualMachine): void {
     if (vm.status === 'STOP' || vm.status === 'PAUSED') {
       vm.status = 'RUNNING';
       this.saveVMs();
@@ -42,7 +49,7 @@ export class VmsListComponent {
     }
   }
 
-  pauseVM(vm: any): void {
+  pauseVM(vm: VirtualMachine): void {
     if (vm.status === 'RUNNING') {
       vm.status = 'PAUSED';
       this.saveVMs();
@@ -50,7 +57,7 @@ export class VmsListComponent {
     }
   }
 
-  stopVM(vm: any): void {
+  stopVM(vm: VirtualMachine): void {
     if (vm.status === 'RUNNING' || vm.status === 'PAUSED') {
       vm.status = 'STOP';
       this.saveVMs();
@@ -58,10 +65,10 @@ export class VmsListComponent {
     }
   }
 
-  deleteVM(index: number): void {
-    const vmName = this.vms[index].displayName;
+  deleteVM(vm: VirtualMachine): void {
+    const vmName = vm.displayName;
     if (confirm(`Tem certeza que deseja excluir a VM ${vmName}?`)) {
-      this.vms.splice(index, 1);
+      this.vms = this.vms.filter(v => v.displayName !== vm.displayName);
       this.saveVMs();
       alert(`${vmName} foi removida.`);
     }

@@ -1,68 +1,108 @@
-.container {
+.vms-container {
     padding: 2rem;
-    background-color: #f4f4f4;
-    border-radius: 10px;
     max-width: 900px;
     margin: auto;
-  }
   
-  h2 {
-    margin-bottom: 1rem;
-    text-align: center;
-  }
-  
-  .create-button {
-    background-color: #007bff;
-    color: white;
-    padding: 0.6rem 1.2rem;
-    border: none;
-    border-radius: 5px;
-    margin-bottom: 1rem;
-    cursor: pointer;
-    display: block;
-    margin-left: auto;
-  }
-  
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    background-color: white;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  }
-  
-  thead {
-    background-color: #007bff;
-    color: white;
-  }
-  
-  th, td {
-    padding: 12px;
-    text-align: center;
-    border-bottom: 1px solid #ddd;
-  }
-  
-  button {
-    padding: 0.4rem 0.8rem;
-    margin: 0 4px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  
-    &:disabled {
-      background-color: #ccc;
-      cursor: not-allowed;
+    h2 {
+      margin-bottom: 1.5rem;
     }
-  }
   
-  button:not(.delete) {
-    background-color: #28a745;
-    color: white;
-  }
+    .create-btn {
+      background-color: #4caf50;
+      color: white;
+      padding: 0.6rem 1rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-bottom: 1.5rem;
+      transition: background-color 0.3s ease, transform 0.3s ease; 
+
   
-  button.delete {
-    background-color: #dc3545;
-    color: white;
+      &:hover {
+        background-color: #45a049;
+        transform: scale(1.05);
+
+      }
+    }
+  
+    .vms-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+  
+      .vm-card {
+        background-color: #f4f4f4;
+        padding: 1.2rem;
+        border-radius: 8px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  
+        h3 {
+          margin-top: 0;
+        }
+  
+        .actions {
+          margin-top: 1rem;
+          display: flex;
+          flex-wrap: wrap;
+          gap: 0.5rem;
+  
+          button {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: opacity 0.3s;
+            transition: background-color 0.3s ease, transform 0.3s ease; 
+
+            &:hover {
+              opacity: 0.8;
+              transform: scale(1.05);
+
+            }
+  
+            &:disabled {
+              background-color: #ccc;
+              cursor: not-allowed;
+            }
+
+            &.start:hover {
+              background-color: #45a049;
+              color: rgb(238, 243, 246);
+            }
+
+            &.pause:hover {
+              background-color: #d4c028bd;
+              color: rgb(14, 14, 12);
+            }
+
+            &.stop-btn:hover {
+              background-color: #a05945;
+              color: rgb(238, 243, 246);
+            }
+  
+            &.delete {
+              background-color: #e53935;
+              color: white;
+            }
+          }
+        }
+  
+        .running {
+          color: green;
+          font-weight: bold;
+          
+        }
+  
+        .paused {
+          color: orange;
+          font-weight: bold;
+        }
+  
+        .stop {
+          color: red;
+          font-weight: bold;
+        }
+      }
+    }
   }
   

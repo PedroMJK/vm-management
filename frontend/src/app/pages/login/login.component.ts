@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, Validators, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../../core/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -12,8 +13,13 @@ import { CommonModule } from '@angular/common';
 })
 export class LoginComponent {
   form: FormGroup;
+  errorMessage: string = '';
 
-  constructor(private fb: FormBuilder, private router: Router) {
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private authService: AuthService
+  ) {
     this.form = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
@@ -23,14 +29,15 @@ export class LoginComponent {
   onSubmit() {
     if (this.form.valid) {
       const { email, password } = this.form.value;
-      if (email && password) {
-        localStorage.setItem('token', 'fake-jwt-token');
+      const success = this.authService.login(email, password);
+
+      if (success) {
         this.router.navigate(['/dashboard']);
       } else {
-        alert('Invalid credentials');
+        this.errorMessage = 'Credenciais inválidas. Tente novamente.';
       }
     } else {
-      alert('Please fill in all fields correctly.');
+      this.errorMessage = 'Preencha todos os campos corretamente.';
     }
   }
 }

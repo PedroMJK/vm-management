@@ -53,18 +53,22 @@ form {
   button[type="submit"] {
     background-color: #28a745;
     color: white;
+    transition: background-color 0.3s ease, transform 0.3s ease; 
   }
   
   button[type="submit"]:hover {
     background-color: #218838;
+    transform: scale(1.05);
   }
   
   button[type="button"] {
     background-color: #6c757d;
     color: white;
+    transition: background-color 0.3s ease, transform 0.3s ease; 
   }
   
   button[type="button"]:hover {
     background-color: #5a6268;
+    transform: scale(1.05);
   }
   

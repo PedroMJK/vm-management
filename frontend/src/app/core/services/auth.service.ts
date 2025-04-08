@@ -11,19 +11,19 @@ export class AuthService {
     login(email: string, password: string): boolean {
       // Para simular credenciais válidas
       if (email === 'admin@vm.com' && password === '123456') {
-        localStorage.setItem('user', JSON.stringify({ email }));
+        localStorage.setItem('authToken', 'fake-token');
         return true;
       }
       return false;
     }
 
     logout(): void {
-      localStorage.removeItem('user');
+      localStorage.removeItem('authToken');
       this.router.navigate(['/login']);
     }
 
     isAuthenticated(): boolean {
-      return !!localStorage.getItem('user');
+      return !!localStorage.getItem('authToken');
     }
    }
 

@@ -14,36 +14,53 @@ public class VirtualMachineService {
     @Autowired
     private VirtualMachineRepository repository;
 
-    // Para buscar todas as VMs
     public List<VirtualMachine> findAll() {
         return repository.findAll();
     }
 
-    // Para buscar VM por Id
     public Optional<VirtualMachine> findById(Long id) {
         return repository.findById(id);
     }
 
-    // Para criar uma nova VM
     public VirtualMachine create(VirtualMachine vm) {
+        if (repository.count() >= 5) {
+            throw new RuntimeException("Limite de 5 VMs atingido.");
+        }
+        vm.setStatus("RUNNING");
         return repository.save(vm);
     }
 
-    // Para atualizar uma VM existente
     public VirtualMachine update(Long id, VirtualMachine updateVM) {
-       return repository.findById(id).map(vm -> {
-        vm.setName(updateVM.getName());
-        vm.setStatus(updateVM.getStatus());
-        vm.setCpuCores(updateVM.getCpuCores());
-        vm.setRamGB(updateVM.getRamGB());
-        vm.setDiskGB(updateVM.getDiskGB());
-        return repository.save(vm);
-       }).orElseThrow(() -> new RuntimeException("VirtualMachine not found with id " + id));
+        return repository.findById(id).map(vm -> {
+            vm.setName(updateVM.getName());
+            vm.setStatus(updateVM.getStatus());
+            vm.setCpuCores(updateVM.getCpuCores());
+            vm.setRamGB(updateVM.getRamGB());
+            vm.setDiskGB(updateVM.getDiskGB());
+            return repository.save(vm);
+        }).orElseThrow(() -> new RuntimeException("VirtualMachine not found with id " + id));
     }
 
-    // Para deletar uma VM
     public void delete(Long id) {
         repository.deleteById(id);
     }
-    
+
+    public VirtualMachine changeStatus(Long id, String status) {
+        return repository.findById(id).map(vm -> {
+            vm.setStatus(status);
+            return repository.save(vm);
+        }).orElseThrow(() -> new RuntimeException("VirtualMachine not found with id " + id));
+    }
+
+    public VirtualMachine startVM(Long id) {
+        return changeStatus(id, "RUNNING");
+    }
+
+    public VirtualMachine pauseVM(Long id) {
+        return changeStatus(id, "PAUSED");
+    }
+
+    public VirtualMachine stopVM(Long id) {
+        return changeStatus(id, "STOPPED");
+    }
 }

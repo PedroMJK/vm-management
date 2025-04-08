@@ -16,5 +16,7 @@
   
       <button type="submit" [disabled]="form.invalid">Login</button>
     </form>
+
+    <p *ngIf="errorMessage" class="error-msg">{{ errorMessage }}</p>
   </div>
   
