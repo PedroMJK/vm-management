@@ -8,7 +8,7 @@ import { ChartOptions, ChartType, ChartData } from 'chart.js';
   selector: 'app-dashboard',
   imports: [CommonModule, NgChartsModule],
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent {
 
